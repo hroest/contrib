@@ -85,6 +85,11 @@ macro(download_contrib_archive libname)
   set(_remote_file ${ARCHIVE_${libname}})
   set(_full_url "${_BASE_URL}${_remote_file}")
 
+  # hack for sqlite
+  if (BUILD_TYPE STREQUAL "SQLITE")
+    set(_full_url "http://ftp.osuosl.org/pub/blfs/conglomeration/sqlite/${_remote_file}")
+  endif()
+
   # create separate folder for our archives
   if(NOT EXISTS ${_archive_folder})
     file(MAKE_DIRECTORY ${_archive_folder})
